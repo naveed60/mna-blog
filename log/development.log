@@ -718,3 +718,31 @@ Processing by ArticlesController#new as HTML
 Completed 200 OK in 10ms (Views: 9.4ms | ActiveRecord: 0.0ms | Allocations: 3046)
 
 
+Started GET "/" for 127.0.0.1 at 2023-10-24 16:38:56 +0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ArticlesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:4
+  Rendered articles/index.html.erb within layouts/application (Duration: 14.2ms | Allocations: 9716)
+  Rendered layout layouts/application.html.erb (Duration: 101.2ms | Allocations: 46824)
+Completed 200 OK in 141ms (Views: 107.4ms | ActiveRecord: 0.5ms | Allocations: 65066)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2023-10-24 16:38:58 +0500
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:14
+  Rendered collection of templates [0 times] (Duration: 0.0ms | Allocations: 28)
+  Rendered comments/_form.html.erb (Duration: 21.6ms | Allocations: 11074)
+  Rendered articles/show.html.erb within layouts/application (Duration: 45.2ms | Allocations: 20055)
+  Rendered layout layouts/application.html.erb (Duration: 47.3ms | Allocations: 21976)
+Completed 200 OK in 53ms (Views: 47.3ms | ActiveRecord: 0.6ms | Allocations: 24870)
+
+
