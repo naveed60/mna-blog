@@ -52,3 +52,52 @@ TechCrunch is a leading blog in this space. It is known for its in-depth coverag
 
 The blog has become a go-to resource for tech lovers and professionals. Their commitment to posting the latest developments as they happen and covering a wide range of interests plays a major role in their popularity today.
 * ...
+
+
+NoMethodError in LsdDecisions#decisionsummary
+
+Showing /home/naveed60/workspace/lsd-new/app/views/lsd_decisions/decisionsummary.html.erb where line #774 raised:
+
+undefined method `[]' for nil
+
+Extracted source (around line #775):
+
+773
+774
+775
+776
+777
+778
+              
+
+	
+
+
+           max_id    = @min_to_max.last[0] 
+           second_id = @min_to_max[-2][0] 
+           third_id  = @min_to_max.size >= 3 ? @min_to_max[-3][0] : nil 
+ @output_buffer.safe_append='
+'.freeze;           @factors.each_with_index do |factor, idx| 
+
+
+
+<%# Pre-compute the top-three alternative IDs %>
+          <% max_id    = @min_to_max.last[0] %>
+          <% second_id = @min_to_max[-2][0] %>
+          <% third_id  = @min_to_max.size >= 3 ? @min_to_max[-3][0] : nil %>
+
+          <% @factors.each_with_index do |factor, idx| %>
+            <tr>
+              <td align="center" bgcolor="#FFFFFF"><%= idx + 1 %></td>
+              <td bgcolor="#FFFFFF"><%= factor.df_name %></td>
+
+              <% [max_id, second_id, third_id].compact.each do |alt_id| %>
+                <% score     = @factorsSort.fetch("#{alt_id}_#{factor.id}", 0) %>
+                <% bar_width = ((score * @max_bar_size) / 75).round %>
+                <td align="left" width="100" bgcolor="#FFFFFF">
+                  <%= image_tag "Line_table.jpg", width: "#{bar_width}%", height: 15 %>
+                </td>
+                <td align="center" bgcolor="#FFFFFF"><%= score %></td>
+              <% end %>
+            </tr>
+          <% end %>
