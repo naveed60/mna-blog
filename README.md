@@ -70,7 +70,27 @@ Extracted source (around line #775):
 778
               
 
-	
+<%# Pre-compute the top-three alternative IDs %>
+<% max_id    = @min_to_max&.last&.[](0) %>
+<% second_id = @min_to_max&.size.to_i >= 2 ? @min_to_max[-2][0] : nil %>
+<% third_id  = @min_to_max&.size.to_i >= 3 ? @min_to_max[-3][0] : nil %>
+
+<% @factors.each_with_index do |factor, idx| %>
+  <tr>
+    <td align="center" bgcolor="#FFFFFF"><%= idx + 1 %></td>
+    <td bgcolor="#FFFFFF"><%= factor.df_name %></td>
+
+    <% [max_id, second_id, third_id].compact.each do |alt_id| %>
+      <% score     = @factorsSort.fetch("#{alt_id}_#{factor.id}", 0) %>
+      <% bar_width = ((score * @max_bar_size) / 75).round %>
+      <td align="left" width="100" bgcolor="#FFFFFF">
+        <%= image_tag "Line_table.jpg", width: "#{bar_width}%", height: 15 %>
+      </td>
+      <td align="center" bgcolor="#FFFFFF"><%= score %></td>
+    <% end %>
+  </tr>
+<% end %>	
+
 
 
            max_id    = @min_to_max.last[0] 
